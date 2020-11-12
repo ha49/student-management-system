@@ -80,11 +80,11 @@ public class StudentRest {
     @GET
     public List<Student> getByNameNP(@PathParam("name") String name) {
 
-        List<Student> studentList = studentService.getByNameNamedParameters(name);
+        List<Student> studentList = studentService.getByLastNameNamedParameters(name);
         if (studentList.isEmpty()) {
             throw new StudentNotFoundException("There is no student with surname " + name);
         } else {
-            return studentService.getByNameNamedParameters(name);
+            return studentService.getByLastNameNamedParameters(name);
         }
     }
 
