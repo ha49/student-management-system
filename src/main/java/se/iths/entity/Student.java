@@ -1,15 +1,35 @@
 package se.iths.entity;
 
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Student {
+    public Student(String firstName, String lastname, String email, String phoneNumber) {
+        this.firstName = firstName;
+        this.lastname = lastname;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+    }
 
 
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String firstName;
     private String lastname;
     private String email;
     private String phoneNumber;
+
+
+
+    public Student() {
+    }
 
     public Long getId() {
         return id;

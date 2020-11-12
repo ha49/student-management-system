@@ -1,13 +1,17 @@
 package se.iths.service;
 
+
 import se.iths.entity.Student;
-import java.util.List;
+
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
+import java.util.List;
 
-
+@Transactional
 public class StudentService {
 
-
+    @PersistenceContext
     EntityManager entityManager;
 
     public Student createStudent(Student student) {
@@ -20,6 +24,13 @@ public class StudentService {
         return student;
     }
 
+    public void deleteStudent(Long id){
+        Student deleteThisStudent=entityManager.find(Student.class, id);
+        entityManager.remove(deleteThisStudent);
+
+
+    }
+
     public Student findStudentById(Long id) {
         return entityManager.find(Student.class, id);
     }
@@ -27,5 +38,7 @@ public class StudentService {
     public List<Student> getAllStudents() {
         return entityManager.createQuery("SELECT s from Student s", Student.class).getResultList();
     }
+
+
 
 }
