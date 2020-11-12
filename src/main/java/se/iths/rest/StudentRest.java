@@ -56,7 +56,7 @@ public class StudentRest {
         Student foundStudent =studentService.findStudentById(id);
         if (foundStudent !=null){
             studentService.deleteStudent(id);
-            return Response.ok().entity("student with id: " + id+ "was successfully removed").build();
+            return Response.ok().entity("student with id: " + id+ " was successfully removed").build();
         } else {
             throw new StudentNotFoundException("Student with ID:" + id+ " not found");
 
@@ -76,8 +76,16 @@ public class StudentRest {
         }
         }
 
+    @Path("getbyname_np/{name}")
+    @GET
+    public List<Student> getByNameNP(@PathParam("name") String name) {
 
-
-
+        List<Student> studentList = studentService.getByNameNamedParameters(name);
+        if (studentList.isEmpty()) {
+            throw new StudentNotFoundException("There is no student with surname " + name);
+        } else {
+            return studentService.getByNameNamedParameters(name);
+        }
+    }
 
 }

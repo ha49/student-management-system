@@ -39,6 +39,9 @@ public class StudentService {
         return entityManager.createQuery("SELECT s from Student s", Student.class).getResultList();
     }
 
-
+    public List<Student> getByNameNamedParameters(String name) {
+        String query = "SELECT s FROM Student s WHERE s.lastname = :name";
+        return entityManager.createQuery(query, Student.class).setParameter("name", name).getResultList();
+    }
 
 }
