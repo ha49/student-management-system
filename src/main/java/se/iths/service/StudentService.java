@@ -40,8 +40,8 @@ public class StudentService {
     }
 
     public List<Student> getByLastNameNamedParameters(String name) {
-        String query = "SELECT s FROM Student s WHERE s.lastname = :name ORDER BY s.firstName ";
-        return entityManager.createQuery(query, Student.class).setParameter("name", name).getResultList();
+        String query = "SELECT s FROM Student s WHERE LOWER (s.lastname) = :name ORDER BY s.firstName ";
+        return entityManager.createQuery(query, Student.class).setParameter("name".toLowerCase(), name).getResultList();
     }
 
 }
