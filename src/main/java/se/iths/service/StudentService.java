@@ -40,7 +40,7 @@ public class StudentService {
     }
 
     public List<Student> getByLastNameNamedParameters(String name) {
-        String query = "SELECT s FROM Student s WHERE LOWER (s.lastname) = :name ORDER BY s.firstName ";
+        String query = "SELECT s FROM Student s WHERE LOWER (s.lastname) = LOWER(:name )ORDER BY s.firstName ";
         return entityManager.createQuery(query, Student.class).setParameter("name".toLowerCase(), name).getResultList();
     }
 
