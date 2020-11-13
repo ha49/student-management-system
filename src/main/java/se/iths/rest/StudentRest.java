@@ -2,6 +2,8 @@ package se.iths.rest;
 
 
 import se.iths.entity.Student;
+import se.iths.exceptions.RequiredFieldIsEmptyException;
+import se.iths.exceptions.StudentNotFoundException;
 import se.iths.service.StudentService;
 
 import javax.inject.Inject;
@@ -22,9 +24,20 @@ public class StudentRest {
     @Path("new")
     @POST
     public Response addStudent(Student student) {
-        studentService.createStudent(student);
-        return Response.ok(student).build();
-    }
+
+        if (RequiredFieldIsEmpty(student)) {
+            throw new RequiredFieldIsEmptyException("Firstname, lastname and e-mail can not be empty. \nPlease fill " +
+                    "all required fields.") ;
+
+        }
+
+        else{
+                studentService.createStudent(student);
+                return Response.ok(student).build();
+            }
+        }
+
+
 
 
     @Path("update")
@@ -86,6 +99,12 @@ public class StudentRest {
         } else {
             return studentService.getByLastNameNamedParameters(name);
         }
+    }
+
+    private static Boolean RequiredFieldIsEmpty (Student student){
+
+        return student.getFirstName().isBlank() || student.getLastname().isBlank() || student.getEmail().isBlank();
+
     }
 
 }
