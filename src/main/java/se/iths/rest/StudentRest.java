@@ -27,17 +27,13 @@ public class StudentRest {
 
         if (RequiredFieldIsEmpty(student)) {
             throw new RequiredFieldIsEmptyException("Firstname, lastname and e-mail can not be empty. \nPlease fill " +
-                    "all required fields.") ;
+                    "all required fields.");
 
+        } else {
+            studentService.createStudent(student);
+            return Response.ok(student).build();
         }
-
-        else{
-                studentService.createStudent(student);
-                return Response.ok(student).build();
-            }
-        }
-
-
+    }
 
 
     @Path("update")
@@ -50,44 +46,42 @@ public class StudentRest {
     @Path("{id}")
     @GET
     public Response getStudent(@PathParam("id") Long id) {
-        Student foundStudent=studentService.findStudentById(id);
-        if (foundStudent !=null){
+        Student foundStudent = studentService.findStudentById(id);
+        if (foundStudent != null) {
             return Response.ok(foundStudent).build();
         } else {
-            throw new StudentNotFoundException("Student with ID:" + id+ " not found");
+            throw new StudentNotFoundException("Student with ID:" + id + " not found");
             //              return Response.status(Response.Status.NOT_FOUND).entity("Item with ID:" + id+ " not found").type(MediaType.TEXT_PLAIN_TYPE).build();
         }
     }
-
 
 
     @Path("{id}")
     @Produces(MediaType.TEXT_PLAIN)
     @DELETE
 
-    public Response removeStudent(@PathParam("id") Long id ){
-        Student foundStudent =studentService.findStudentById(id);
-        if (foundStudent !=null){
+    public Response removeStudent(@PathParam("id") Long id) {
+        Student foundStudent = studentService.findStudentById(id);
+        if (foundStudent != null) {
             studentService.deleteStudent(id);
-            return Response.ok().entity("student with id: " + id+ " was successfully removed").build();
+            return Response.ok().entity("student with id: " + id + " was successfully removed").build();
         } else {
-            throw new StudentNotFoundException("Student with ID:" + id+ " not found");
+            throw new StudentNotFoundException("Student with ID:" + id + " not found");
 
         }
     }
 
 
-
     @Path("getall")
     @GET
     public List<Student> getAllStudents() {
-        List<Student> studentList=studentService.getAllStudents();
-        if(studentList.isEmpty()){
+        List<Student> studentList = studentService.getAllStudents();
+        if (studentList.isEmpty()) {
             throw new StudentNotFoundException("Currently there is no student information recorded in the database");
         } else {
             return studentService.getAllStudents();
         }
-        }
+    }
 
     @Path("getbyname_np/{name}")
     @GET
@@ -101,7 +95,7 @@ public class StudentRest {
         }
     }
 
-    private static Boolean RequiredFieldIsEmpty (Student student){
+    private static Boolean RequiredFieldIsEmpty(Student student) {
 
         return student.getFirstName().isBlank() || student.getLastname().isBlank() || student.getEmail().isBlank();
 

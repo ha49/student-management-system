@@ -5,6 +5,6 @@ import javax.ws.rs.core.Application;
 
 
 @ApplicationPath("api/v1")
-public class StudentConfig extends Application{
-    
+public class StudentConfig extends Application {
+
 }

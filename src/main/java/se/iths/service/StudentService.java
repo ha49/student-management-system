@@ -24,8 +24,8 @@ public class StudentService {
         return student;
     }
 
-    public void deleteStudent(Long id){
-        Student deleteThisStudent=entityManager.find(Student.class, id);
+    public void deleteStudent(Long id) {
+        Student deleteThisStudent = entityManager.find(Student.class, id);
         entityManager.remove(deleteThisStudent);
 
 
