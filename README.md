@@ -116,6 +116,28 @@ GetAll:
 Currently there is no student information recorded in the database
 ````
 
+
+__Get By Last Name URL: http://localhost:8080/studeman/api/v1/student/getbyname_np/Burgers__
+__Get By Last Name URL: http://localhost:8080/studeman/api/v1/student/getbyname_np/burgers__
+__Get By Last Name URL: http://localhost:8080/studeman/api/v1/student/getbyname_np/BURGERS__
+
+Output:
+
+````
+
+  {
+    "email": "Allison.Burgers@email.com",
+    "firstName": "Allison",
+    "id": 1,
+    "lastname": "Burgers",
+    "phoneNumber": "070xxxxxxx"
+  }
+````
+
+
+
+
+
 ## PUT
 
 __Update URL: http://localhost:8080/studeman/api/v1/student/update/1__
